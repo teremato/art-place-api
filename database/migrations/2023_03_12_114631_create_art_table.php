@@ -15,7 +15,18 @@ return new class extends Migration
     {
         Schema::create('art', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('authorId');
+
+            $table->text('text');
+            $table->string('type');
+            $table->string('title');
+            $table->unsignedBigInteger('watch_count');
             $table->timestamps();
+
+            $table->foreign('authorId')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

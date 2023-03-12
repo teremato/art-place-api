@@ -14,6 +14,18 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'avatar' => $this->getAvatar() ?? '',
+            'role' => $this->role,
+            'direction' => $this->direction ?? 'author',
+            'isSubscribe' => false, //TODO make subs
+            'subscribeCount' => 0, //TODO make subs->count
+            'commonLikes' => $this->getLikesCount($this->arts()),
+            'commonWatch' => $this->getWatchCount($this->arts()),
+            'created_at' => $this->created_at
+        ];
     }
 }

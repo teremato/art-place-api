@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('users', function(Blueprint $table) {
+            $table->string('role')->default('user');
+            $table->string('direction')->nullable();
+        });
     }
 
     /**
@@ -23,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function(Blueprint $table) {
+            $table->dropColumn('role');
+            $table->dropColumn('direction');
+        });
     }
 };
